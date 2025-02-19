@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
 from sklearn.model_selection import LeaveOneOut
 
-df = pl.read_parquet("C:/Users/main/OneDrive/Desktop/study/cs/vscode/boilergrades/subtitles.parquet")
+df = pl.read_parquet("C:/Users/v3rmi/OneDrive/Desktop/study/cs/vscode/boilergrades/subtitles.parquet")
 
 df = df.filter(pl.col("file_name").str.contains("MA 161"))
 
@@ -22,7 +22,7 @@ topics = [
 for topic in topics:
     # extract problem data from csvs
 
-    csvFile = f"C:/Users/v3rmi/OneDrive/Desktop/study/cs/vscode/boilergrades/{topic}.csv"
+    csvFile = f"C:/Users/main/OneDrive/Desktop/study/cs/vscode/boilergrades/{topic}.csv"
     topicDf = pl.read_csv(csvFile, columns=["Problem", "Start", "End"])
 
     for row in topicDf.iter_rows():
@@ -56,9 +56,13 @@ questions = pl.DataFrame({"questionTopic": questionTopic, "questionText": questi
 
 mapping = {topic: i for i, topic in enumerate(topics)}
 
+print(questions)
+
 questions = questions.with_columns(
     pl.col("questionTopic").replace_strict(mapping).alias("questionTopicEncoded")
 )
+
+print(questions)
 
 # convert text to vector form
 vectorizer = TfidfVectorizer(stop_words='english', max_features=135)

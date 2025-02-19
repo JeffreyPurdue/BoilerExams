@@ -8,7 +8,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import LeaveOneOut
 
-df = pl.read_parquet("C:/Users/v3rmi/OneDrive/Desktop/study/cs/vscode/boilergrades/subtitles.parquet")
+df = pl.read_parquet("C:/Users/main/OneDrive/Desktop/study/cs/vscode/boilergrades/subtitles.parquet")
 
 df = df.filter(pl.col("file_name").str.contains("MA 161"))
 
